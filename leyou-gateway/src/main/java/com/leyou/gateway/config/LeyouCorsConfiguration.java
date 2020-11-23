@@ -21,7 +21,7 @@ public class LeyouCorsConfiguration {
 
         //1.添加CORS配置信息
         //1) 允许的域,不要写*，否则cookie就无法使用了
-        configuration.addAllowedOrigin("http://manage.leyou.com/");
+        configuration.addAllowedOrigin("http://manage.leyou.com");
         //2) 是否发送Cookie信息
         configuration.setAllowCredentials(true);//允许携带cookie
         //3) 允许的请求方式

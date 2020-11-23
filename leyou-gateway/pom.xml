@@ -23,4 +23,5 @@
             <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
         </dependency>
     </dependencies>
+
 </project>

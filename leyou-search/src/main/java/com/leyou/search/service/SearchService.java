@@ -1,6 +1,7 @@
 package com.leyou.search.service;
 
 import com.leyou.item.pojo.Brand;
+import com.leyou.item.pojo.Sku;
 import com.leyou.item.pojo.Spu;
 import com.leyou.search.client.BrandClient;
 import com.leyou.search.client.CategoryClient;
@@ -40,6 +41,15 @@ public class SearchService {
 //        根据品牌id查询品牌
         Brand brand = this.brandClient.queryBrandById(spu.getBrandId());
 
+//        根据spuId查询所有的sku
+        List<Sku> skus = this.goodsClient.querySkusBySpuId(spu.getId());
+//        初始化一个价格集合，收集所有sku的价格
+        List<Long> prices = new ArrayList<>();
+        skus.forEach(sku -> {
+            prices.add(sku.getPrice());
+        });
+
+
         goods.setId(spu.getId());
         goods.setCid1(spu.getCid1());
         goods.setCid2(spu.getCid2());
@@ -51,7 +61,7 @@ public class SearchService {
 //        拼接all字段，需要分类名称以及品牌名称
         goods.setAll(spu.getTitle() + " " + StringUtils.join(names," ") + " " + brand.getName());
 //        获取spu下的所有sku的价格
-        goods.setPrice(null);
+        goods.setPrice(prices);
 //        获取spu下的所有sku,并转化成json字符串
         goods.setSkus(null);
 //        获取所有查询的规格参数{name；value}；

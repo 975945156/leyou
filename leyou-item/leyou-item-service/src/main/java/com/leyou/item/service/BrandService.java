@@ -58,14 +58,24 @@ public class BrandService {
     @Transactional
     public void saveBrand(Brand brand, List<Long> cids) {
 
-//先新增brand
-        Boolean flag = this.brandMapper.insertSelective(brand) == 1;
+        //先新增brand
+        this.brandMapper.insertSelective(brand);
 
-//再新增中间表
-        if (flag){
-            cids.forEach(cid ->{
-                this.brandMapper.insertCategoryAndBrand(cid,brand.getId());
-            });
-        }
+        //再新增中间表
+        cids.forEach(cid -> {
+            this.brandMapper.insertCategoryAndBrand(cid, brand.getId());
+        });
+    }
+/**
+ * error：selectBrandByCid写成了selectByCid导致新增功能实现不了
+ *
+* */
+    public List<Brand> queryBrandsByCid(Long cid) {
+
+        return this.brandMapper.selectBrandByCid(cid);
+    }
+
+    public Brand queryBrandById(Long id) {
+        return this.brandMapper.selectByPrimaryKey(id);
     }
 }

@@ -4,7 +4,7 @@ spring:
   application:
     name: item-service
   datasource:
-    url: jdbc:mysql:///heima
+    url: jdbc:mysql:///heima?useUnicode=true&characterEncoding=utf8
     username: root
     password: root
 eureka:

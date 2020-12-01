@@ -19,15 +19,15 @@ public interface GoodsApi {
      *
      * 根据spuId查询spuDetail
      * */
-    @GetMapping("spu/detail/{spuId}")
-    public SpuDetail querySpuDetailBySpuId(@PathVariable("spuId")Long spuId);
+    @GetMapping("/spu/detail/{spuId}")
+    SpuDetail querySpuDetailBySpuId(@PathVariable("spuId")Long spuId);
 
 
     /**
      * 根据条件分页查询spu
      * */
-    @GetMapping("spu/page")
-    public PageResult<SpuBo> querySpuBoByPage(
+    @GetMapping("/spu/page")
+    PageResult<SpuBo> querySpuBoByPage(
             @RequestParam(value = "key", required = false) String key,
             @RequestParam(value = "saleable", required = false) Boolean saleable,
             @RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -39,5 +39,5 @@ public interface GoodsApi {
      * 根据spuId查询sku集合
      * */
     @GetMapping("sku/list")
-    public List<Sku> querySkusBySpuId(@RequestParam("id")Long spuId);
+    List<Sku> querySkusBySpuId(@RequestParam("id")Long spuId);
 }

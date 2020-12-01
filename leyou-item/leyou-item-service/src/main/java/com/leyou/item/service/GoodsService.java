@@ -72,7 +72,7 @@ public class GoodsService {
             //copy共同属性的值到新的对象
             BeanUtils.copyProperties(spu, spuBo);
             //查询分类名称
-            List<String> names = this.categoryService.queryNamesByIds(Arrays.asList(spu.getCid1(), spu.getCid2(), spu.getCid3()));
+            List<String> names = this.categoryService.queryNameByIds(Arrays.asList(spu.getCid1(), spu.getCid2(), spu.getCid3()));
             spuBo.setCname(StringUtils.join(names, "/"));
 
             //查询品牌名称

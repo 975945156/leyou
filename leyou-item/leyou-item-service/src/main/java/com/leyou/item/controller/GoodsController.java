@@ -8,13 +8,13 @@ import com.leyou.item.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/goods")
 public class GoodsController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class GoodsController {
     /**
     * 根据条件分页查询spu
     * */
-    @GetMapping("spu/page")
+    @GetMapping("/spu/page")
     public ResponseEntity<PageResult<SpuBo>> querySpuBoByPage(
             @RequestParam(value = "key", required = false) String key,
             @RequestParam(value = "saleable", required = false) Boolean saleable,
@@ -37,17 +37,33 @@ public class GoodsController {
         return ResponseEntity.ok(pageResult);
     }
 
-    @PostMapping("goods")
-    public ResponseEntity<Void> saveGoods(@RequestBody SpuBo spuBo){
-        this.goodsService.saveGoods(spuBo);
+    /**
+     * 保存商品
+     * @param spu
+     * @return
+     */
+    @PostMapping
+    public ResponseEntity<Void> saveGoods(@RequestBody SpuBo spu){
+        this.goodsService.saveGoods(spu);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    /**
+     * 修改商品
+     * @param spuBo
+     * @return
+     */
+    @PutMapping
+    public ResponseEntity<Void> updateGoods(@RequestBody SpuBo spuBo){
+        this.goodsService.updateGoods(spuBo);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
     /**
      *
      * 根据spuId查询spuDetail
     * */
-    @GetMapping("spu/detail/{spuId}")
+    @GetMapping("/spu/detail/{spuId}")
     public ResponseEntity<SpuDetail> querySpuDetailBySpuId(@PathVariable("spuId")Long spuId){
         SpuDetail spuDetail = this.goodsService.querySpuDetailBySpuId(spuId);
         if (spuDetail == null) {
@@ -69,9 +85,4 @@ public class GoodsController {
         return ResponseEntity.ok(skus);
     }
 
-    @PutMapping("goods")
-    public ResponseEntity<Void> updateGoods(@RequestBody SpuBo spuBo){
-        this.goodsService.updateGoods(spuBo);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
 }

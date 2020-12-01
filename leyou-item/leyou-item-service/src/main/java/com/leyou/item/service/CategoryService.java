@@ -26,7 +26,7 @@ public class CategoryService {
         return this.categoryMapper.select(record);
     }
 
-    public List<String> queryNamesByIds(List<Long> ids) {
+    public List<String> queryNameByIds(List<Long> ids) {
 
         List<Category> list = this.categoryMapper.selectByIdList(ids);
         List<String> names = new ArrayList<>();

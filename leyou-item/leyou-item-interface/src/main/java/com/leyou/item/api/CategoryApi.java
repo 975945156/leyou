@@ -9,6 +9,6 @@ import java.util.List;
 @RequestMapping("category")
 public interface CategoryApi{
 
-    @GetMapping
+    @GetMapping("names")
     public List<String> queryNameByIds(@RequestParam("ids")List<Long> ids);
 }

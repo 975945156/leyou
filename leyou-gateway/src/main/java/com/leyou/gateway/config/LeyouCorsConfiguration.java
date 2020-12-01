@@ -22,20 +22,23 @@ public class LeyouCorsConfiguration {
         //1.添加CORS配置信息
         //1) 允许的域,不要写*，否则cookie就无法使用了
         configuration.addAllowedOrigin("http://manage.leyou.com");
+        configuration.addAllowedOrigin("http://www.leyou.com");
         //2) 是否发送Cookie信息
         configuration.setAllowCredentials(true);//允许携带cookie
         //3) 允许的请求方式
-        configuration.addAllowedMethod("*");
-//        configuration.addAllowedMethod("OPTIONS");
-//        configuration.addAllowedMethod("HEAD");
-//        configuration.addAllowedMethod("GET");
-//        configuration.addAllowedMethod("PUT");
-//        configuration.addAllowedMethod("POST");
-//        configuration.addAllowedMethod("DELETE");
-//        configuration.addAllowedMethod("PATCH");
+//        configuration.addAllowedMethod("*");
+        configuration.addAllowedMethod("OPTIONS");
+        configuration.addAllowedMethod("HEAD");
+        configuration.addAllowedMethod("GET");
+        configuration.addAllowedMethod("PUT");
+        configuration.addAllowedMethod("POST");
+        configuration.addAllowedMethod("DELETE");
+        configuration.addAllowedMethod("PATCH");
         // 4）允许的头信息
         configuration.addAllowedHeader("*");
 
+        // 5)有效时长
+        configuration.setMaxAge(3600L);
 
         //初始化cors配置源对象
         UrlBasedCorsConfigurationSource configurationSource=new UrlBasedCorsConfigurationSource();

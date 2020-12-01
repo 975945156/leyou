@@ -12,7 +12,7 @@ public class SpecParam {
     private Long cid;
     private Long groupId;
     private String name;
-    @Column(name = "'numeric'")
+    @Column(name = "`numeric`")
     private Boolean numeric;
     private String unit;
     private Boolean generic;

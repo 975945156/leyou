@@ -1,9 +1,13 @@
 package com.leyou.search.pojo;
 
+import java.util.Map;
+
 public class SearchRequest {
     private String key;// 搜索条件
 
     private Integer page;// 当前页
+
+    private Map<String,String> filter;
 
     private String sortBy;//排序字段
 
@@ -11,6 +15,14 @@ public class SearchRequest {
 
     private static final Integer DEFAULT_SIZE = 20;// 每页大小，不从页面接收，而是固定大小
     private static final Integer DEFAULT_PAGE = 1;// 默认页
+
+    public Map<String, String> getFilter() {
+        return filter;
+    }
+
+    public void setFilter(Map<String, String> filter) {
+        this.filter = filter;
+    }
 
     public String getKey() {
         return key;

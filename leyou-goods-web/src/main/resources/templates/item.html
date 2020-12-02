@@ -704,6 +704,15 @@ $(function(){
 <script type="text/javascript" src="/js/plugins/jquery.jqzoom/jquery.jqzoom.js"></script>
 <script type="text/javascript" src="/js/plugins/jquery.jqzoom/zoom.js"></script>
 <script type="text/javascript" src="index/index.js"></script>
+<script th:inline="javascript">
+	const a = /*[[${groups}]]*/ [];
+	const b = /*[[${paramMap}]]*/ [];
+	const c = /*[[${categories}]]*/ [];
+	const d = /*[[${spu}]]*/ {};
+	const e = /*[[${spuDetail}]]*/ {};
+	const f = /*[[${skus}]]*/ [];
+	const g = /*[[${brand}]]*/ {};
+</script>
 </body>
 
 </html>

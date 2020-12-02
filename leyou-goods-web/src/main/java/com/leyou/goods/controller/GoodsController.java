@@ -1,5 +1,6 @@
 package com.leyou.goods.controller;
 
+import com.leyou.goods.service.GoodsHtmlService;
 import com.leyou.goods.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
+    @Autowired
+    private GoodsHtmlService goodsHtmlService;
+
     /**
      * 跳转到商品详情页
      * @param model
@@ -24,11 +28,15 @@ public class GoodsController {
      * @return
      */
     @GetMapping("{id}.html")
-    public String toItemPage(Model model, @PathVariable("id")Long id){
+    public String toItemPage(@PathVariable("id")Long id, Model model){
 
+        // 加载所需的数据
         Map<String, Object> map = this.goodsService.loadData(id);
-
+        // 把数据放入数据模型
         model.addAllAttributes(map);
+
+        // 页面静态化
+        this.goodsHtmlService.asyncExcute(id);
 
         return "item";
     }

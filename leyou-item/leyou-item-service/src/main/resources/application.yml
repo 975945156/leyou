@@ -23,5 +23,5 @@ eureka:
     lease-expiration-duration-in-seconds: 15
 mybatis:
   type-aliases-package: com.leyou.item.pojo
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

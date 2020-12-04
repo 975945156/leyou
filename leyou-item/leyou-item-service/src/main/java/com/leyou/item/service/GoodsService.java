@@ -109,6 +109,7 @@ public class GoodsService {
         spuDetail.setSpuId(spuBo.getId());
         this.spuDetailMapper.insertSelective(spuDetail);
 
+        //保存sku和库存信息
         saveSkuAndStock(spuBo);
 
         sendMsg("insert",spuBo.getId());

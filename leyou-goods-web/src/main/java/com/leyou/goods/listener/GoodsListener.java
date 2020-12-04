@@ -17,25 +17,33 @@ public class GoodsListener {
 
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = "LEYOU.ITEM.SAVE.QUEUE",durable = "true"),
-            exchange = @Exchange(value = "LEYOU.ITEM.EXCHANGE",ignoreDeclarationExceptions = "true",type = ExchangeTypes.TOPIC),
+            exchange = @Exchange(
+                    value = "LEYOU.ITEM.EXCHANGE",
+                    ignoreDeclarationExceptions = "true",
+                    type = ExchangeTypes.TOPIC),
             key = {"item.insert","item.update"}
     ))
     public void save(Long id){
         if (id == null){
             return;
         }
+        // 创建页面
         this.goodsHtmlService.createHtml(id);
     }
 
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = "LEYOU.ITEM.DELETE.QUEUE",durable = "true"),
-            exchange = @Exchange(value = "LEYOU.ITEM.EXCHANGE",ignoreDeclarationExceptions = "true",type = ExchangeTypes.TOPIC),
+            exchange = @Exchange(
+                    value = "LEYOU.ITEM.EXCHANGE",
+                    ignoreDeclarationExceptions = "true",
+                    type = ExchangeTypes.TOPIC),
             key = {"item.delete"}
     ))
     public void delete(Long id){
         if (id == null){
             return;
         }
+        // 删除页面
         this.goodsHtmlService.deleteHtml(id);
     }
 

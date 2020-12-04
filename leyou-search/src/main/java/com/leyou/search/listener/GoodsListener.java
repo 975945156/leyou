@@ -17,27 +17,46 @@ public class GoodsListener {
     @Autowired
     private SearchService searchService;
 
+    /**
+     * 处理insert和update的消息
+     *
+     * @param id
+     * @throws IOException
+     */
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = "LEYOU.SEARCH.SAVE.QUEUE",durable="true"),
-            exchange = @Exchange(value = "LEYOU.ITEM.EXCHANGE",ignoreDeclarationExceptions = "true",type = ExchangeTypes.TOPIC),
-            key = {"item.insert","item.update"}
+            value = @Queue(value = "LEYOU.SEARCH.SAVE.QUEUE", durable = "true"),
+            exchange = @Exchange(
+                    value = "LEYOU.ITEM.EXCHANGE",
+                    ignoreDeclarationExceptions = "true",
+                    type = ExchangeTypes.TOPIC),
+            key = {"item.insert", "item.update"}
     ))
     public void save(Long id) throws IOException {
-        if (id == null){
+        if (id == null) {
             return;
         }
+        // 创建或更新索引
         this.searchService.save(id);
     }
 
+    /**
+     * 处理delete的消息
+     * @param id
+     * @throws IOException
+     */
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = "LEYOU.SEARCH.DELETE.QUEUE",durable="true"),
-            exchange = @Exchange(value = "LEYOU.ITEM.EXCHANGE",ignoreDeclarationExceptions = "true",type = ExchangeTypes.TOPIC),
+            value = @Queue(value = "LEYOU.SEARCH.DELETE.QUEUE", durable = "true"),
+            exchange = @Exchange(
+                    value = "LEYOU.ITEM.EXCHANGE",
+                    ignoreDeclarationExceptions = "true",
+                    type = ExchangeTypes.TOPIC),
             key = {"item.delete"}
     ))
     public void delete(Long id) throws IOException {
-        if (id == null){
+        if (id == null) {
             return;
         }
+        // 删除索引
         this.searchService.delete(id);
     }
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/goods")
+//@RequestMapping("/goods")
 public class GoodsController {
 
     @Autowired
@@ -100,6 +100,4 @@ public class GoodsController {
         return ResponseEntity.ok(spu);
 
     }
-
-
 }
